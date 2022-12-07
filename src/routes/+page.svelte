@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Canvas } from "@threlte/core";
   import type { PageData } from "./$types";
-  import Scene from "$lib/client/components/Scene.svelte";
+  import Scene from "$lib/client/three/components/Scene.svelte";
 
   export let data: PageData;
 </script>

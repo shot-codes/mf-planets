@@ -28,6 +28,7 @@ export const actions: Actions = {
     event.locals.pb.authStore.clear();
     throw redirect(307, "/admin/login");
   },
+
   update: async (event) => {
     const data = await event.request.formData();
     const config = data.get("config");
