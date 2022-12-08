@@ -54,7 +54,7 @@
   <T.Mesh material={backgroundMaterial} scale={100}>
     <T.SphereGeometry />
   </T.Mesh>
-  <T.DirectionalLight castShadow position={[-100, 10, 10]} />
+  <T.DirectionalLight castShadow position={[-100, 10, 10]} color={"#ff7070"} />
   <T.DirectionalLight position={[-100, 10, -10]} intensity={0.2} />
 </T.Group>
 <T.AmbientLight intensity={0.15} />

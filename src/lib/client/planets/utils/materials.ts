@@ -44,7 +44,6 @@ export const backgroundMaterial = new LayerMaterial({
       mapping: "local",
       visible: true,
     }),
-
     new Noise({
       mapping: "local",
       type: "white",
@@ -52,7 +51,7 @@ export const backgroundMaterial = new LayerMaterial({
       colorA: "white",
       colorB: "black",
       mode: "subtract",
-      alpha: 0.4,
+      alpha: 0.2,
     }),
   ],
 });
@@ -138,12 +137,21 @@ export const materials = {
         colorC: new Color("#cb4d80"),
         colorD: new Color("#ffffff"),
         alpha: 0.35,
-        scale: 1,
+        scale: 0.2,
         type: "perlin",
         offset: [0, 0, 0],
         mapping: "local",
         mode: "normal",
         visible: true,
+      }),
+      new Noise({
+        mapping: "local",
+        type: "white",
+        scale: 1,
+        colorA: "white",
+        colorB: "black",
+        mode: "subtract",
+        alpha: 0.2,
       }),
       new Fresnel({
         color: new Color("#eeff00"),
@@ -155,8 +163,8 @@ export const materials = {
         visible: true,
       }),
       new Displace({
-        strength: 0.25,
-        scale: 1,
+        strength: 6.45,
+        scale: 0.2,
         type: "perlin",
         offset: [0, 0, 0],
         mode: "normal",
