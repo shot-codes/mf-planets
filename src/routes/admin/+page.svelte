@@ -2,21 +2,36 @@
   import type { PageData, ActionData } from "./$types";
   import { someValue, someFunction } from "$cms/utils/someUtility";
   import { enhance } from "$app/forms";
+  import { fade } from "svelte/transition";
 
   console.log(someValue, someFunction(42));
 
   export let form: ActionData;
   export let data: PageData;
+
+  let recentlyUpdated = false;
+
+  $: if (form?.success) {
+    recentlyUpdated = true;
+    setTimeout(() => {
+      recentlyUpdated = false;
+    }, 3000);
+  }
 </script>
+
+<svelte:head>
+  <title>Zibra - Admin</title>
+</svelte:head>
 
 <div class="grid h-full w-full place-content-center">
   <div
-    class="relative grid w-[500px] space-y-4 rounded border border-neutral-300 bg-neutral-50 p-5 shadow dark:border-neutral-600 dark:bg-neutral-800"
+    class="relative grid w-[500px] space-y-4 rounded border border-base-300 bg-base-50 p-5 shadow dark:border-base-600 dark:bg-base-800"
   >
-    <h1 class="text-lg">Admin</h1>
+    <h1 class="text-lg">Configuration</h1>
 
-    {#if form?.success}
+    {#if recentlyUpdated}
       <div
+        transition:fade={{ duration: 200 }}
         class="absolute right-0 top-0 mr-6 flex place-items-center space-x-1 text-green-600"
       >
         <svg
@@ -36,7 +51,7 @@
     {/if}
 
     <textarea
-      class="h-32 rounded border border-neutral-300 p-1 dark:border-neutral-600 dark:bg-neutral-900"
+      class="h-32 rounded border border-base-300 p-1 dark:border-base-600 dark:bg-base-900"
       value={JSON.stringify(data)}
     />
 
@@ -44,18 +59,11 @@
       <input
         name="config"
         type="text"
-        class="flex-grow rounded rounded border border-neutral-300 p-1 dark:border-neutral-500 dark:bg-neutral-700"
+        class="flex-grow rounded rounded border border-base-300 p-1 dark:border-base-500 dark:bg-base-700"
       />
       <button
-        class="rounded border border-neutral-400 bg-neutral-200 p-1 px-4 dark:border-neutral-600 dark:bg-neutral-800"
+        class="rounded border border-base-300 bg-base-200 p-1 px-4 dark:border-base-600 dark:bg-base-800"
         >Update</button
-      >
-    </form>
-
-    <form use:enhance method="POST" action="?/logout" class="grid">
-      <button
-        class="rounded border border-neutral-400 bg-neutral-200 p-1 dark:border-neutral-600 dark:bg-neutral-800"
-        >Log out</button
       >
     </form>
   </div>

@@ -15,7 +15,7 @@ const config = {
   kit: {
     adapter: adapter(),
     alias: {
-      $three: "src/lib/client/three/",
+      $planets: "src/lib/client/planets/",
       $cms: "src/lib/client/cms/",
     },
   },

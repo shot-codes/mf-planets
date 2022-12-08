@@ -14,7 +14,7 @@ pnpm run dev
 Mock data credentials:
 
 ```
-// Pocketbasedp admin user and password:
+// Pocketbase admin, user and password:
 admin@milky.way
 adminadmin
 

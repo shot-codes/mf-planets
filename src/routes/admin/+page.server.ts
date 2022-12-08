@@ -10,9 +10,7 @@ export const load: PageServerLoad = async (event) => {
       const config = await pb
         .collection("solar_systems")
         .getOne("5slw951x0qurpdp");
-      return {
-        data: JSON.stringify(config.data),
-      };
+      return config.data;
     } catch (err) {
       return {
         "No config?": "🤷‍♀️",

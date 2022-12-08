@@ -8,12 +8,10 @@ export const load: PageServerLoad = async () => {
     const resultList = await pb
       .collection("solar_systems")
       .getOne("6j7e9wkghr4vxip");
-    return {
-      system: resultList.data,
-    };
+    return resultList.data;
   } catch (err) {
     return {
-      "Sorry, no planets": "🤷‍♀️",
+      success: false,
     };
   }
 };

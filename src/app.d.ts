@@ -3,6 +3,8 @@ declare namespace App {
   interface Locals {
     pb: import("pocketbase").default;
   }
-  // interface PageData {}
+  interface PageData {
+    root: import("$lib/common/types").Planet;
+  }
   // interface Platform {}
 }
