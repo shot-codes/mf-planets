@@ -30,7 +30,7 @@
   </T.Mesh>
 
   <!-- Orbits -->
-  {#each planet.children as p, i}
+  {#each planet.children as p, i (p.text)}
     <T.Group
       position.x={orbitRadius *
         Math.cos((i * 2 * Math.PI) / planet.children.length)}
