@@ -23,14 +23,14 @@
 </script>
 
 <T.Group rotation.y={stopwatch / 5}>
-  <Text text={planet.text} scale={5} position={{ y: 2 }} />
+
   <!-- Planet -->
   <T.Mesh castShadow {material} rotation.y={-stopwatch * 0.75}>
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
   </T.Mesh>
 
   <!-- Orbits -->
-  {#each planet.children as p, i (p.text)}
+  {#each planet.children as p, i}
     <T.Group
       position.x={orbitRadius *
         Math.cos((i * 2 * Math.PI) / planet.children.length)}
@@ -42,4 +42,5 @@
       <svelte:self planet={p} orbitRadius={4} />
     </T.Group>
   {/each}
+  
 </T.Group>
