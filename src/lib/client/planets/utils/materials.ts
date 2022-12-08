@@ -1,5 +1,34 @@
-import { LayerMaterial, Noise, Gradient, Depth, Fresnel } from "lamina/vanilla";
+import {
+  LayerMaterial,
+  Noise,
+  Gradient,
+  Depth,
+  Fresnel,
+  Displace,
+} from "lamina/vanilla";
 import { BackSide, Color } from "three";
+
+export const updateMaterialLayers = (
+  material: LayerMaterial,
+  key: string,
+  value: unknown
+): LayerMaterial => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    material.layers.find((l) => l.name === "noise")[key] = value;
+  } catch {
+    /* empty */
+  }
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    material.layers.find((l) => l.name === "Displace")[key] = value;
+  } catch {
+    /* empty */
+  }
+  return material;
+};
 
 export const backgroundMaterial = new LayerMaterial({
   side: BackSide,
@@ -94,6 +123,44 @@ export const materials = {
         colorB: "black",
         mode: "subtract",
         alpha: 0.2,
+      }),
+    ],
+  }),
+
+  // System-core Material
+  core: new LayerMaterial({
+    color: "#ff0000",
+    lighting: "standard",
+    layers: [
+      new Noise({
+        colorA: new Color("#ecd5d5"),
+        colorB: new Color("#0b090a"),
+        colorC: new Color("#cb4d80"),
+        colorD: new Color("#ffffff"),
+        alpha: 0.35,
+        scale: 1,
+        type: "perlin",
+        offset: [0, 0, 0],
+        mapping: "local",
+        mode: "normal",
+        visible: true,
+      }),
+      new Fresnel({
+        color: new Color("#eeff00"),
+        alpha: 0.3,
+        power: 2.75,
+        intensity: 3.8,
+        bias: 0,
+        mode: "normal",
+        visible: true,
+      }),
+      new Displace({
+        strength: 0.25,
+        scale: 1,
+        type: "perlin",
+        offset: [0, 0, 0],
+        mode: "normal",
+        visible: true,
       }),
     ],
   }),

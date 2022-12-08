@@ -20,24 +20,33 @@
 
   const { pointer } = useThrelte();
   let cameraOrigin = new Vector3(50, 15, 0);
+  let newPosition = new Vector3(50, 15, 0);
   let mesh: Mesh;
 
-  let pointerSpring = spring($pointer);
-  let cameraPositionSpring = tweened(cameraOrigin);
+  const pointerSpring = spring($pointer);
   $: {
+    // console.log($pointerSpring)
     pointerSpring.set($pointer);
-    const newPosition = new Vector3(
-      $cameraPositionSpring.x,
-      $cameraPositionSpring.y + 8 * $pointerSpring.y,
-      $cameraPositionSpring.z - 8 * $pointerSpring.x
+  }
+
+  const cameraPositionSpring = spring(cameraOrigin);
+  $: {
+    let whatever = $pointerSpring;
+    console.log(whatever);
+    newPosition = new Vector3(
+      cameraOrigin.x,
+      cameraOrigin.y + 5 * $pointerSpring.y,
+      cameraOrigin.z - 5 * $pointerSpring.x
     );
+    console.log(newPosition);
+    // console.log($cameraPositionSpring)
     cameraPositionSpring.set(newPosition);
   }
 
   let backgroundRotation = 0;
-  useFrame(() => {
+  useFrame(({ camera }) => {
     backgroundRotation += 0.002;
-    // get(camera).position.set(cameraOrigin.x, cameraOrigin.y+8*$dampenedPointer.y, cameraOrigin.z-8*$dampenedPointer.x)
+    // get(camera).position.set(cameraOrigin.x, cameraOrigin.y+8*$pointer.y, cameraOrigin.z-8*$pointer.x)
   });
 </script>
 
@@ -55,11 +64,7 @@
 </T.Mesh>
 
 <T.PerspectiveCamera let:ref makeDefault fov={40}>
-  <TransformableObject
-    object={ref}
-    lookAt={mesh}
-    position={$cameraPositionSpring}
-  />
+  <TransformableObject object={ref} lookAt={mesh} position={newPosition} />
   <OrbitControls
     enableDamping
     maxPolarAngle={degToRad(150)}

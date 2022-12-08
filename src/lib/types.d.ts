@@ -6,6 +6,7 @@ export enum Material {
 export interface Planet {
   text: string;
   radius: number;
+  materialAnimationRate: number;
   material: Material;
   children: Planet[];
 }
