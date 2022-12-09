@@ -1,9 +1,7 @@
 <script lang="ts">
-  import type { System } from "$lib/types";
+  import type { Planet as PlanetType } from "$lib/types";
   import {
     OrbitControls,
-    type PerspectiveCamera,
-    type ThreltePointerEvent,
     T,
     TransformableObject,
     useFrame,
@@ -13,10 +11,9 @@
   import { backgroundMaterial } from "$planets/utils/materials";
   import Planet from "$planets/components/Planet.svelte";
   import { Vector3, Mesh } from "three";
-  import { spring, tweened } from "svelte/motion";
-  import { get } from "svelte/store";
+  import { spring } from "svelte/motion";
 
-  export let system: System;
+  export let system: PlanetType;
 
   const { pointer } = useThrelte();
   let cameraOrigin = new Vector3(50, 15, 0);
@@ -44,7 +41,7 @@
   }
 
   let backgroundRotation = 0;
-  useFrame(({ camera }) => {
+  useFrame(() => {
     backgroundRotation += 0.002;
     // get(camera).position.set(cameraOrigin.x, cameraOrigin.y+8*$pointer.y, cameraOrigin.z-8*$pointer.x)
   });
@@ -72,4 +69,4 @@
   />
 </T.PerspectiveCamera>
 
-<Planet planet={system.root} />
+<Planet planet={system} />

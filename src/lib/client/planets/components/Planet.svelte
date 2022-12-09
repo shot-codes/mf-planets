@@ -23,7 +23,6 @@
 </script>
 
 <T.Group rotation.y={stopwatch / 5}>
-
   <!-- Planet -->
   <T.Mesh castShadow {material} rotation.y={-stopwatch * 0.75}>
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
@@ -42,5 +41,4 @@
       <svelte:self planet={p} orbitRadius={4} />
     </T.Group>
   {/each}
-  
 </T.Group>

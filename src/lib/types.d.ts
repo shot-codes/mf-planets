@@ -10,7 +10,3 @@ export interface Planet {
   material: Material;
   children: Planet[];
 }
-
-export interface System {
-  root: Planet;
-}
