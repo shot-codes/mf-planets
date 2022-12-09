@@ -32,6 +32,7 @@ export const updateMaterialLayers = (
 
 export const backgroundMaterial = new LayerMaterial({
   side: BackSide,
+  fog: false,
   layers: [
     new Gradient({
       colorA: new Color("#002b4d").convertSRGBToLinear(),

@@ -12,12 +12,13 @@
   import Planet from "$planets/components/Planet.svelte";
   import { Vector3, Mesh } from "three";
   import { spring } from "svelte/motion";
+  import { Fog } from "@threlte/core";
 
   export let system: PlanetType;
 
   const { pointer } = useThrelte();
-  let cameraOrigin = new Vector3(50, 15, 0);
-  let newPosition = new Vector3(50, 15, 0);
+  let cameraOrigin = new Vector3(60, 15, 0);
+  let newPosition = new Vector3(60, 15, 0);
   let mesh: Mesh;
 
   const pointerSpring = spring($pointer);
@@ -47,6 +48,8 @@
   });
 </script>
 
+<Fog color={"#ff0000"} near={50} far={120} />
+
 <T.Group interactive rotation.y={backgroundRotation}>
   <T.Mesh material={backgroundMaterial} scale={100}>
     <T.SphereGeometry />
@@ -60,7 +63,7 @@
   <T.SphereGeometry />
 </T.Mesh>
 
-<T.PerspectiveCamera let:ref makeDefault fov={40}>
+<T.PerspectiveCamera let:ref makeDefault fov={30}>
   <TransformableObject object={ref} lookAt={mesh} position={newPosition} />
   <OrbitControls
     enableDamping

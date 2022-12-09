@@ -5,7 +5,6 @@
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
 
   export let planet: Planet;
-  console.log(planet);
 
   export let orbitRadius = 16;
   let stopwatch = 1;
