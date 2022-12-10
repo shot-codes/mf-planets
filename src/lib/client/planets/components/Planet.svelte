@@ -3,15 +3,15 @@
   import { T, useFrame } from "@threlte/core";
   import { Text } from "@threlte/extras";
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
-  import { cloneDeep } from "lodash";
 
   export let planet: Planet;
   export let orbitRadius: number;
   let stopwatch = 1;
-  let material = cloneDeep(materials[planet.material.key]);
+  let material = materials[planet.material.key];
+  let layerMaterial = material.material();
 
-  material.material = updateMaterialLayers(
-    material.material,
+  layerMaterial = updateMaterialLayers(
+    layerMaterial,
     "scale",
     planet.material.scale
   );
@@ -19,7 +19,7 @@
   useFrame(() => {
     stopwatch += 0.001;
     let offsetRate = stopwatch * planet.material.offsetRate; // TODO: validate this is working
-    material.material = updateMaterialLayers(material.material, "offset", [
+    layerMaterial = updateMaterialLayers(layerMaterial, "offset", [
       offsetRate,
       offsetRate,
       offsetRate,
@@ -29,11 +29,7 @@
 
 <T.Group rotation.y={stopwatch / 5}>
   <!-- Planet -->
-  <T.Mesh
-    castShadow
-    material={material.material}
-    rotation.y={-stopwatch * 0.75}
-  >
+  <T.Mesh castShadow material={layerMaterial} rotation.y={-stopwatch * 0.75}>
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
   </T.Mesh>
 
