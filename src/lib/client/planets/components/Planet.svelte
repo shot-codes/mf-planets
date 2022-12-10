@@ -16,7 +16,7 @@
     planet.material.scale
   );
 
-  updateMaterialLayers(material.material, "scale", material.scale);
+  updateMaterialLayers(layerMaterial, "scale", material.scale);
 
   useFrame(() => {
     stopwatch += 0.001;

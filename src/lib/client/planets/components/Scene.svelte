@@ -9,11 +9,10 @@
   } from "@threlte/core";
   import { degToRad } from "three/src/math/MathUtils";
   import { backgrounds } from "$planets/utils/materials";
-  import Planet from "$planets/components/Planet.svelte";
   import { Vector3, Mesh } from "three";
   import { spring } from "svelte/motion";
   import { Fog } from "@threlte/core";
-  import { get } from "svelte/store";
+  import Planet from "$planets/components/Planet.svelte";
 
   export let system: Config;
 
