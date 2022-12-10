@@ -1,3 +1,4 @@
+import type { Materials, Backgrounds } from "$lib/types";
 import {
   LayerMaterial,
   Noise,
@@ -57,7 +58,70 @@ export const backgroundMaterial = new LayerMaterial({
   ],
 });
 
-export const materials = {
+export const backgrounds: Backgrounds = {
+  purple: {
+    fogColor: new Color(0xff0000),
+    lightColor: new Color(0xff0000),
+    material: new LayerMaterial({
+      side: BackSide,
+      fog: false,
+      layers: [
+        new Gradient({
+          colorA: new Color(0x002b4d).convertSRGBToLinear(),
+          colorB: new Color(0xff4040).convertSRGBToLinear(),
+          alpha: 1,
+          contrast: 0.5,
+          start: 1,
+          end: -4,
+          axes: "x",
+          mapping: "local",
+          visible: true,
+        }),
+        new Noise({
+          mapping: "local",
+          type: "white",
+          scale: 1,
+          colorA: "white",
+          colorB: "black",
+          mode: "subtract",
+          alpha: 0.2,
+        }),
+      ],
+    }),
+  },
+  green: {
+    fogColor: new Color(0x00ff00),
+    lightColor: new Color(0x00ff00),
+    material: new LayerMaterial({
+      side: BackSide,
+      fog: false,
+      layers: [
+        new Gradient({
+          colorA: new Color(0x005030).convertSRGBToLinear(),
+          colorB: new Color(0x0000ff).convertSRGBToLinear(),
+          alpha: 1,
+          contrast: 0.5,
+          start: 1,
+          end: -4,
+          axes: "x",
+          mapping: "local",
+          visible: true,
+        }),
+        new Noise({
+          mapping: "local",
+          type: "white",
+          scale: 1,
+          colorA: "white",
+          colorB: "black",
+          mode: "subtract",
+          alpha: 0.2,
+        }),
+      ],
+    }),
+  },
+};
+
+export const materials: Materials = {
   // Marble Material
   marble: new LayerMaterial({
     color: "#ffffff",
@@ -95,34 +159,6 @@ export const materials = {
         bias: 0,
         mode: "screen",
         visible: true,
-      }),
-    ],
-  }),
-
-  // Background Material
-  background: new LayerMaterial({
-    side: BackSide,
-    layers: [
-      new Gradient({
-        colorA: new Color("#002b4d").convertSRGBToLinear(),
-        colorB: new Color("#FF4040").convertSRGBToLinear(),
-        alpha: 1,
-        contrast: 0.5,
-        start: 1,
-        end: -4,
-        axes: "x",
-        mapping: "local",
-        visible: true,
-      }),
-
-      new Noise({
-        mapping: "local",
-        type: "white",
-        scale: 5,
-        colorA: "white",
-        colorB: "black",
-        mode: "subtract",
-        alpha: 0.2,
       }),
     ],
   }),

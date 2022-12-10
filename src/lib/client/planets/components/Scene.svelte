@@ -8,7 +8,7 @@
     useThrelte,
   } from "@threlte/core";
   import { degToRad } from "three/src/math/MathUtils";
-  import { backgroundMaterial } from "$planets/utils/materials";
+  import { backgrounds } from "$planets/utils/materials";
   import Planet from "$planets/components/Planet.svelte";
   import { Vector3, Mesh } from "three";
   import { spring } from "svelte/motion";
@@ -36,26 +36,27 @@
       $cameraPositionSpring[1],
       $cameraPositionSpring[2]
     );
-    console.log(cameraPosition);
   }
-  useFrame(({ camera }) => {
-    get(camera).position.set(
-      cameraPosition.x,
-      cameraPosition.y,
-      cameraPosition.z
-    );
-  });
+  // useFrame(({ camera }) => {
+  //   get(camera).position.set(
+  //     cameraPosition.x,
+  //     cameraPosition.y,
+  //     cameraPosition.z
+  //   );
+  // });
 
-  // Oscillate background back and forth. This keeps the grain texture live.
+  // Pan the background back and forth. This keeps the grain texture live.
   let backgroundRotation = degToRad(130);
+  const maxDegree = degToRad(150);
+  const minDegree = degToRad(110);
   let reverseBackgroundRotation = false;
   useFrame(() => {
-    if (!reverseBackgroundRotation && backgroundRotation <= degToRad(150)) {
+    if (!reverseBackgroundRotation && backgroundRotation <= maxDegree) {
       backgroundRotation += 0.002;
     } else {
       reverseBackgroundRotation = true;
     }
-    if (reverseBackgroundRotation && backgroundRotation >= degToRad(110)) {
+    if (reverseBackgroundRotation && backgroundRotation >= minDegree) {
       backgroundRotation -= 0.002;
     } else {
       reverseBackgroundRotation = false;
@@ -63,13 +64,17 @@
   });
 </script>
 
-<Fog color={"#ff0000"} near={50} far={120} />
+<Fog color={backgrounds["green"].fogColor} near={50} far={120} />
 
 <T.Group interactive rotation.y={backgroundRotation}>
-  <T.Mesh material={backgroundMaterial} scale={100}>
+  <T.Mesh material={backgrounds["green"].material} scale={100}>
     <T.SphereGeometry />
   </T.Mesh>
-  <T.DirectionalLight castShadow position={[-100, 10, 10]} color={"#ff7070"} />
+  <T.DirectionalLight
+    castShadow
+    position={[-100, 10, 10]}
+    color={backgrounds["green"].lightColor}
+  />
   <T.DirectionalLight position={[-100, 10, -10]} intensity={0.2} />
 </T.Group>
 <T.AmbientLight intensity={0.15} />
@@ -79,12 +84,12 @@
 </T.Mesh>
 
 <T.PerspectiveCamera let:ref makeDefault fov={30}>
-  <TransformableObject object={ref} lookAt={mesh} />
-  <!-- <OrbitControls
+  <TransformableObject object={ref} lookAt={mesh} position={cameraPosition} />
+  <OrbitControls
     enableDamping
     maxPolarAngle={degToRad(150)}
     enablePan={false}
-  /> -->
+  />
 </T.PerspectiveCamera>
 
 <Planet planet={system} />
