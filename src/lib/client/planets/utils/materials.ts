@@ -1,4 +1,4 @@
-import type { Materials, Backgrounds } from "$lib/types";
+import { type Materials, type Backgrounds, MaterialKey } from "$lib/types";
 import {
   LayerMaterial,
   Noise,
@@ -33,15 +33,15 @@ export const updateMaterialLayers = (
 
 export const backgrounds: Backgrounds = {
   purple: {
-    fogColor: new Color(0xff9090),
-    lightColor: new Color(0xff9090),
+    fogColor: new Color("#ff9090"),
+    lightColor: new Color("#ff9090"),
     material: new LayerMaterial({
       side: BackSide,
       fog: false,
       layers: [
         new Gradient({
-          colorA: new Color(0x002b4d).convertSRGBToLinear(),
-          colorB: new Color(0xff4040).convertSRGBToLinear(),
+          colorA: new Color("#002b4d").convertSRGBToLinear(),
+          colorB: new Color("#ff4040").convertSRGBToLinear(),
           alpha: 1,
           contrast: 0.5,
           start: 1,
@@ -64,15 +64,15 @@ export const backgrounds: Backgrounds = {
   },
 
   green: {
-    fogColor: new Color(0x90ff90),
-    lightColor: new Color(0x90ff90),
+    fogColor: new Color("#90ff90"),
+    lightColor: new Color("#90ff90"),
     material: new LayerMaterial({
       side: BackSide,
       fog: false,
       layers: [
         new Gradient({
-          colorA: new Color(0x005030).convertSRGBToLinear(),
-          colorB: new Color(0x0000ff).convertSRGBToLinear(),
+          colorA: new Color("#005030").convertSRGBToLinear(),
+          colorB: new Color("#0000ff").convertSRGBToLinear(),
           alpha: 1,
           contrast: 0.5,
           start: 1,
@@ -98,7 +98,9 @@ export const backgrounds: Backgrounds = {
 export const materials: Materials = {
   // Marble Material
   marble: {
+    key: MaterialKey.Marble,
     offsetRate: 3,
+    scale: 3,
     material: new LayerMaterial({
       color: "#ffffff",
       lighting: "physical",
@@ -142,7 +144,9 @@ export const materials: Materials = {
 
   // System-core Material
   core: {
+    key: MaterialKey.Core,
     offsetRate: 3,
+    scale: 0.2,
     material: new LayerMaterial({
       color: "#ff0000",
       lighting: "standard",
@@ -153,7 +157,7 @@ export const materials: Materials = {
           colorC: new Color("#cb4d80"),
           colorD: new Color("#ffffff"),
           alpha: 0.35,
-          scale: 0.2,
+          scale: 1,
           type: "perlin",
           offset: [0, 0, 0],
           mapping: "local",

@@ -85,11 +85,7 @@
 
 <T.PerspectiveCamera let:ref makeDefault fov={30}>
   <TransformableObject object={ref} lookAt={mesh} position={cameraPosition} />
-  <OrbitControls
-    enableDamping
-    maxPolarAngle={degToRad(150)}
-    enablePan={false}
-  />
+  <OrbitControls enableDamping maxPolarAngle={degToRad(150)} />
 </T.PerspectiveCamera>
 
-<Planet planet={system.planets} />
+<Planet planet={system.planets} orbitRadius={16} />

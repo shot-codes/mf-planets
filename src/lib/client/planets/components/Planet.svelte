@@ -3,16 +3,22 @@
   import { T, useFrame } from "@threlte/core";
   import { Text } from "@threlte/extras";
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
+  import { cloneDeep } from "lodash";
 
   export let planet: Planet;
-
-  export let orbitRadius = 16;
+  export let orbitRadius: number;
   let stopwatch = 1;
-  let material = materials[planet.material];
+  let material = cloneDeep(materials[planet.material.key]);
+
+  material.material = updateMaterialLayers(
+    material.material,
+    "scale",
+    planet.material.scale
+  );
 
   useFrame(() => {
     stopwatch += 0.001;
-    let offsetRate = stopwatch * material.offsetRate; // TODO: validate this is working
+    let offsetRate = stopwatch * planet.material.offsetRate; // TODO: validate this is working
     material.material = updateMaterialLayers(material.material, "offset", [
       offsetRate,
       offsetRate,

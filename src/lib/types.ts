@@ -12,7 +12,9 @@ export enum BackgroundKey {
 }
 
 export interface Material {
+  key: MaterialKey;
   offsetRate: number;
+  scale: number;
   material: LayerMaterial;
 }
 
@@ -33,7 +35,7 @@ export type Backgrounds = {
 export interface Planet {
   text: string;
   radius: number;
-  material: MaterialKey;
+  material: Material;
   children: Planet[];
 }
 
