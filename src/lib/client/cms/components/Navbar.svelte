@@ -3,7 +3,7 @@
 </script>
 
 <nav
-  class="absolute z-10 flex w-full items-center justify-between border-b bg-base-200 p-3 px-6 shadow dark:border-base-700 dark:bg-base-800 dark:shadow-lg"
+  class="absolute z-10 flex h-[66px] w-full items-center justify-between border-b bg-base-200 p-3 px-6 shadow dark:border-base-700 dark:bg-base-800 dark:shadow-lg"
 >
   <ul class="m-2 flex space-x-4">
     <li>

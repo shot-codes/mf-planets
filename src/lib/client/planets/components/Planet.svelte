@@ -36,7 +36,7 @@
         Math.sin((i * 2 * Math.PI) / planet.children.length)}
       rotation.y={stopwatch}
     >
-      <Text text={i.toString()} scale={5} position={{ y: 2.5 }} />
+      <Text text={p.text} scale={5} position={{ y: 2.5 }} />
       <svelte:self planet={p} orbitRadius={4} />
     </T.Group>
   {/each}

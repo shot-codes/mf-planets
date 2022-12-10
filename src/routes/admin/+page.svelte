@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageData, ActionData } from "./$types";
+  import PlanetViewer from "$lib/client/cms/components/PlanetViewer.svelte";
   import { someValue, someFunction } from "$cms/utils/someUtility";
   import { enhance } from "$app/forms";
   import { fade } from "svelte/transition";
@@ -23,6 +24,14 @@
   <title>Zibra - Admin</title>
 </svelte:head>
 
+<div class="container mx-auto flex h-[calc(100vh-66px)] p-4">
+  <div class="flex-grow">Config</div>
+  <div class="h-full w-[300px]">
+    <PlanetViewer />
+  </div>
+</div>
+
+<!-- 
 <div class="grid h-full w-full place-content-center">
   <div
     class="relative grid w-[500px] space-y-4 rounded border border-base-300 bg-base-50 p-5 shadow dark:border-base-600 dark:bg-base-800"
@@ -67,4 +76,4 @@
       >
     </form>
   </div>
-</div>
+</div> -->

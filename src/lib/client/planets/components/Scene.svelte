@@ -13,38 +13,53 @@
   import { Vector3, Mesh } from "three";
   import { spring } from "svelte/motion";
   import { Fog } from "@threlte/core";
+  import { get } from "svelte/store";
 
   export let system: PlanetType;
 
   const { pointer } = useThrelte();
   let cameraOrigin = new Vector3(60, 15, 0);
-  let newPosition = new Vector3(60, 15, 0);
+  let cameraPosition = new Vector3(60, 15, 0);
   let mesh: Mesh;
 
-  const pointerSpring = spring($pointer);
+  const cameraPositionSpring = spring([60, 15, 0]);
   $: {
-    // console.log($pointerSpring)
-    pointerSpring.set($pointer);
-  }
-
-  const cameraPositionSpring = spring(cameraOrigin);
-  $: {
-    let whatever = $pointerSpring;
-    console.log(whatever);
-    newPosition = new Vector3(
+    cameraPositionSpring.set([
       cameraOrigin.x,
-      cameraOrigin.y + 5 * $pointerSpring.y,
-      cameraOrigin.z - 5 * $pointerSpring.x
-    );
-    console.log(newPosition);
-    // console.log($cameraPositionSpring)
-    cameraPositionSpring.set(newPosition);
+      cameraOrigin.y + 8 * $pointer.y,
+      cameraOrigin.z - 8 * $pointer.x,
+    ]);
   }
+  $: {
+    cameraPosition.set(
+      $cameraPositionSpring[0],
+      $cameraPositionSpring[1],
+      $cameraPositionSpring[2]
+    );
+    console.log(cameraPosition);
+  }
+  useFrame(({ camera }) => {
+    get(camera).position.set(
+      cameraPosition.x,
+      cameraPosition.y,
+      cameraPosition.z
+    );
+  });
 
-  let backgroundRotation = 0;
+  // Oscillate background back and forth. This keeps the grain texture live.
+  let backgroundRotation = degToRad(130);
+  let reverseBackgroundRotation = false;
   useFrame(() => {
-    backgroundRotation += 0.002;
-    // get(camera).position.set(cameraOrigin.x, cameraOrigin.y+8*$pointer.y, cameraOrigin.z-8*$pointer.x)
+    if (!reverseBackgroundRotation && backgroundRotation <= degToRad(150)) {
+      backgroundRotation += 0.002;
+    } else {
+      reverseBackgroundRotation = true;
+    }
+    if (reverseBackgroundRotation && backgroundRotation >= degToRad(110)) {
+      backgroundRotation -= 0.002;
+    } else {
+      reverseBackgroundRotation = false;
+    }
   });
 </script>
 
@@ -64,12 +79,12 @@
 </T.Mesh>
 
 <T.PerspectiveCamera let:ref makeDefault fov={30}>
-  <TransformableObject object={ref} lookAt={mesh} position={newPosition} />
-  <OrbitControls
+  <TransformableObject object={ref} lookAt={mesh} />
+  <!-- <OrbitControls
     enableDamping
     maxPolarAngle={degToRad(150)}
     enablePan={false}
-  />
+  /> -->
 </T.PerspectiveCamera>
 
 <Planet planet={system} />

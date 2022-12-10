@@ -14,7 +14,7 @@ export const load: PageServerLoad = async () => {
     return {
       system,
     };
-  } catch (err) {
+  } catch (_) {
     throw error(500, "failed to get solar system from pocketbase.");
   }
 };

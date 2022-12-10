@@ -1,5 +1,5 @@
 import type { PageServerLoad, Actions } from "./$types";
-import { redirect, invalid } from "@sveltejs/kit";
+import { redirect, invalid, error } from "@sveltejs/kit";
 import PocketBase from "pocketbase";
 
 const pb = new PocketBase("http://127.0.0.1:8090");
@@ -9,12 +9,10 @@ export const load: PageServerLoad = async (event) => {
     try {
       const config = await pb
         .collection("solar_systems")
-        .getOne("5slw951x0qurpdp");
+        .getOne("6j7e9wkghr4vxip");
       return config.data;
     } catch (err) {
-      return {
-        "No config?": "🤷‍♀️",
-      };
+      throw error(500, "failed to get solar system from pocketbase.");
     }
   } else {
     throw redirect(307, "/admin/login");
