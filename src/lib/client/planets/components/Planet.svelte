@@ -5,17 +5,23 @@
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
 
   export let planet: Planet;
-
-  export let orbitRadius = 16;
+  export let orbitRadius: number;
   let stopwatch = 1;
-  let material = materials[planet.material];
+  let material = materials[planet.material.key];
+  let layerMaterial = material.material();
+
+  layerMaterial = updateMaterialLayers(
+    layerMaterial,
+    "scale",
+    planet.material.scale
+  );
 
   updateMaterialLayers(material.material, "scale", material.scale);
 
   useFrame(() => {
     stopwatch += 0.001;
-    let offsetRate = stopwatch * material.offsetRate; // TODO: validate this is working
-    material.material = updateMaterialLayers(material.material, "offset", [
+    let offsetRate = stopwatch * planet.material.offsetRate; // TODO: validate this is working
+    layerMaterial = updateMaterialLayers(layerMaterial, "offset", [
       offsetRate,
       offsetRate,
       offsetRate,
@@ -25,11 +31,7 @@
 
 <T.Group rotation.y={stopwatch / 5}>
   <!-- Planet -->
-  <T.Mesh
-    castShadow
-    material={material.material}
-    rotation.y={-stopwatch * 0.75}
-  >
+  <T.Mesh castShadow material={layerMaterial} rotation.y={-stopwatch * 0.75}>
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
   </T.Mesh>
 
