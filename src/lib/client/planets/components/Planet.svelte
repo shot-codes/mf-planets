@@ -16,8 +16,6 @@
     planet.material.scale
   );
 
-  updateMaterialLayers(layerMaterial, "scale", material.scale);
-
   useFrame(() => {
     stopwatch += 0.001;
     let offsetRate = stopwatch * planet.material.offsetRate; // TODO: validate this is working
