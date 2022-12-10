@@ -15,6 +15,6 @@
 
 <div class="absolute top-0 left-0 h-full w-full">
   <Canvas>
-    <Scene system={data.system} />
+    <Scene system={data.config} />
   </Canvas>
 </div>

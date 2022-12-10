@@ -11,6 +11,11 @@ export enum BackgroundKey {
   Green = "green",
 }
 
+export interface Material {
+  offsetRate: number;
+  material: LayerMaterial;
+}
+
 export interface Background {
   fogColor: Color;
   lightColor: Color;
@@ -18,7 +23,7 @@ export interface Background {
 }
 
 export type Materials = {
-  [key in MaterialKey]: LayerMaterial;
+  [key in MaterialKey]: Material;
 };
 
 export type Backgrounds = {
@@ -28,7 +33,6 @@ export type Backgrounds = {
 export interface Planet {
   text: string;
   radius: number;
-  materialAnimationRate: number;
   material: MaterialKey;
   children: Planet[];
 }

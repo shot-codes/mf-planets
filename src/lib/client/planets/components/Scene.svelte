@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Planet as PlanetType } from "$lib/types";
+  import type { Config } from "$lib/types";
   import {
     OrbitControls,
     T,
@@ -15,7 +15,7 @@
   import { Fog } from "@threlte/core";
   import { get } from "svelte/store";
 
-  export let system: PlanetType;
+  export let system: Config;
 
   const { pointer } = useThrelte();
   let cameraOrigin = new Vector3(60, 15, 0);
@@ -64,16 +64,16 @@
   });
 </script>
 
-<Fog color={backgrounds["green"].fogColor} near={50} far={120} />
+<Fog color={backgrounds[system.background].fogColor} near={50} far={120} />
 
 <T.Group interactive rotation.y={backgroundRotation}>
-  <T.Mesh material={backgrounds["green"].material} scale={100}>
+  <T.Mesh material={backgrounds[system.background].material} scale={100}>
     <T.SphereGeometry />
   </T.Mesh>
   <T.DirectionalLight
     castShadow
     position={[-100, 10, 10]}
-    color={backgrounds["green"].lightColor}
+    color={backgrounds[system.background].lightColor}
   />
   <T.DirectionalLight position={[-100, 10, -10]} intensity={0.2} />
 </T.Group>
@@ -92,4 +92,4 @@
   />
 </T.PerspectiveCamera>
 
-<Planet planet={system} />
+<Planet planet={system.planets} />

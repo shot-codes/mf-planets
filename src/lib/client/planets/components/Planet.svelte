@@ -12,8 +12,8 @@
 
   useFrame(() => {
     stopwatch += 0.001;
-    let offsetRate = stopwatch * planet.materialAnimationRate;
-    material = updateMaterialLayers(material, "offset", [
+    let offsetRate = stopwatch * material.offsetRate; // TODO: validate this is working
+    material.material = updateMaterialLayers(material.material, "offset", [
       offsetRate,
       offsetRate,
       offsetRate,
@@ -23,7 +23,11 @@
 
 <T.Group rotation.y={stopwatch / 5}>
   <!-- Planet -->
-  <T.Mesh castShadow {material} rotation.y={-stopwatch * 0.75}>
+  <T.Mesh
+    castShadow
+    material={material.material}
+    rotation.y={-stopwatch * 0.75}
+  >
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
   </T.Mesh>
 

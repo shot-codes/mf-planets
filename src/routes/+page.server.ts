@@ -1,7 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import PocketBase from "pocketbase";
 import { error } from "@sveltejs/kit";
-import type { Planet } from "$lib/types";
+import type { Config } from "$lib/types";
 
 const pb = new PocketBase("http://127.0.0.1:8090");
 
@@ -9,10 +9,10 @@ export const load: PageServerLoad = async () => {
   try {
     const resultList = await pb
       .collection("solar_systems")
-      .getOne("6j7e9wkghr4vxip");
-    const system: Planet = resultList.data;
+      .getOne("zijoto20rma8mq7");
+    const config: Config = resultList.data;
     return {
-      system,
+      config,
     };
   } catch (_) {
     throw error(500, "failed to get solar system from pocketbase.");

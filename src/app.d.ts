@@ -4,7 +4,7 @@ declare namespace App {
     pb: import("pocketbase").default;
   }
   interface PageData {
-    system: import("$lib/common/types").Planet;
+    config: import("$lib/common/types").Config;
   }
   // interface Platform {}
 }
