@@ -9,7 +9,7 @@ export const load: PageServerLoad = async () => {
   try {
     const resultList = await pb
       .collection("solar_systems")
-      .getOne("zijoto20rma8mq7");
+      .getOne("6j7e9wkghr4vxip");
     const config: Config = resultList.data;
     return {
       config,

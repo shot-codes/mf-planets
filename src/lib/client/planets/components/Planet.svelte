@@ -10,6 +10,8 @@
   let stopwatch = 1;
   let material = materials[planet.material];
 
+  updateMaterialLayers(material.material, "scale", material.scale);
+
   useFrame(() => {
     stopwatch += 0.001;
     let offsetRate = stopwatch * material.offsetRate; // TODO: validate this is working

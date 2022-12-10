@@ -13,6 +13,7 @@ export enum BackgroundKey {
 
 export interface Material {
   offsetRate: number;
+  scale: number;
   material: LayerMaterial;
 }
 

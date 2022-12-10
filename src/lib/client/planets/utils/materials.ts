@@ -98,7 +98,8 @@ export const backgrounds: Backgrounds = {
 export const materials: Materials = {
   // Marble Material
   marble: {
-    offsetRate: 3,
+    offsetRate: 1,
+    scale: 4,
     material: new LayerMaterial({
       color: "#ffffff",
       lighting: "physical",
@@ -142,7 +143,8 @@ export const materials: Materials = {
 
   // System-core Material
   core: {
-    offsetRate: 3,
+    offsetRate: 10,
+    scale: 0.2,
     material: new LayerMaterial({
       color: "#ff0000",
       lighting: "standard",
