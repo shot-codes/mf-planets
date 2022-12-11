@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Planet } from "$lib/types";
   import { T, useFrame } from "@threlte/core";
-  import { Text } from "@threlte/extras";
+  // import { Text } from "@threlte/extras";
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
 
   export let planet: Planet;
@@ -18,7 +18,7 @@
 
   useFrame(() => {
     stopwatch += 0.001;
-    let offsetRate = stopwatch * planet.material.offsetRate; // TODO: validate this is working
+    let offsetRate = stopwatch * planet.material.offsetRate;
     layerMaterial = updateMaterialLayers(layerMaterial, "offset", [
       offsetRate,
       offsetRate,
@@ -42,7 +42,7 @@
         Math.sin((i * 2 * Math.PI) / planet.children.length)}
       rotation.y={stopwatch}
     >
-      <Text text={p.text} scale={5} position={{ y: 2.5 }} />
+      <!-- <Text text={p.text} scale={5} position={{ y: 2.5 }} /> -->
       <svelte:self planet={p} orbitRadius={4} />
     </T.Group>
   {/each}
