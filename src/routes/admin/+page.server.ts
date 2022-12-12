@@ -9,7 +9,7 @@ export const load: PageServerLoad = async (event) => {
     try {
       const config = await pb
         .collection("solar_systems")
-        .getOne("6j7e9wkghr4vxip");
+        .getOne("5slw951x0qurpdp");
       return config.data;
     } catch (err) {
       throw error(500, "failed to get solar system from pocketbase.");
