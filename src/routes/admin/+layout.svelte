@@ -6,5 +6,6 @@
 
 <!-- This element fills the space of the fixed navbar -->
 <div class="h-[66px]" />
-
-<slot />
+<div class="h-[calc(100vh-66px)]">
+  <slot />
+</div>

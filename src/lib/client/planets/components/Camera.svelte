@@ -8,7 +8,6 @@
   import { degToRad } from "three/src/math/MathUtils";
   import { Vector3, Mesh } from "three";
   import { spring } from "svelte/motion";
-  // import { get } from "svelte/store";
 
   const { pointer } = useThrelte();
   let cameraOrigin = new Vector3(60, 15, 0);
@@ -29,14 +28,8 @@
       $cameraPositionSpring[1],
       $cameraPositionSpring[2]
     );
+    // cameraPosition = cameraPosition;
   }
-  // useFrame(({ camera }) => {
-  //   get(camera).position.set(
-  //     cameraPosition.x,
-  //     cameraPosition.y,
-  //     cameraPosition.z
-  //   );
-  // });
 </script>
 
 <T.Mesh bind:ref={mesh} scale={0.1} position={[0, 0, 0]}>

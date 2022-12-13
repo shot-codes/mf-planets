@@ -3,6 +3,7 @@
   import { T, useFrame } from "@threlte/core";
   // import { Text } from "@threlte/extras";
   import { materials, updateMaterialLayers } from "$planets/utils/materials";
+  import OrbitRing from "./OrbitRing.svelte";
 
   export let planet: Planet;
   export let orbitRadius: number;
@@ -32,6 +33,10 @@
   <T.Mesh castShadow material={layerMaterial} rotation.y={-stopwatch * 0.75}>
     <T.SphereGeometry args={[planet.radius, 200, 200]} />
   </T.Mesh>
+
+  <!-- Ring -->
+
+  <OrbitRing />
 
   <!-- Orbits -->
   {#each planet.children as p, i}
