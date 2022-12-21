@@ -5,7 +5,7 @@ import PocketBase from "pocketbase";
 const pb = new PocketBase("http://127.0.0.1:8090");
 
 // This is just here for demo purposes and is the reason PageData is not properly
-// types on /admin/+page.svelte. Either remove this and rely solely on +layout.server.ts
+// typed on /admin/+page.svelte. Either remove this and rely solely on +layout.server.ts
 // for data loading, or extend the PageData interface in app.d.ts
 export const load: PageServerLoad = async (event) => {
   if (event.locals.pb.authStore.isValid) {
@@ -24,13 +24,13 @@ export const load: PageServerLoad = async (event) => {
 };
 
 export const actions: Actions = {
-  logout: async (event) => {
-    event.locals.pb.authStore.clear();
+  logout: async ({ locals }) => {
+    locals.pb.authStore.clear();
     throw redirect(307, "/admin/login");
   },
 
-  update: async (event) => {
-    const data = await event.request.formData();
+  update: async ({ request }) => {
+    const data = await request.formData();
     const config = data.get("config");
 
     // TODO: Config validation

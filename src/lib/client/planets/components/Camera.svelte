@@ -37,6 +37,7 @@
 </T.Mesh>
 
 <T.PerspectiveCamera let:ref makeDefault fov={30}>
-  <TransformableObject object={ref} lookAt={mesh} position={cameraPosition} />
+  <!-- <TransformableObject object={ref} lookAt={mesh} position={cameraPosition} /> -->
+  <TransformableObject object={ref} position={cameraPosition} />
   <OrbitControls enableDamping maxPolarAngle={degToRad(150)} />
 </T.PerspectiveCamera>
