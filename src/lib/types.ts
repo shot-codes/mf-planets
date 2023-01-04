@@ -34,15 +34,21 @@ export type Backgrounds = {
   [key in BackgroundKey]: Background;
 };
 
-export interface Planet {
-  text: string;
-  radius: number;
-  material: Material;
-  children: Planet[];
-}
-
 export interface Config {
   name: string;
   background: BackgroundKey;
-  planets: Planet;
+  system: PlanetSystem;
+}
+
+export interface Planet {
+  name: string;
+  radius: number;
+  material: Material;
+}
+
+export interface PlanetSystem {
+  planet: Planet;
+  orbitRadius: number;
+  orbitSpeed: number;
+  children: PlanetSystem[];
 }

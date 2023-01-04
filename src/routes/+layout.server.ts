@@ -9,7 +9,7 @@ export const load: LayoutServerLoad = async () => {
   try {
     const resultList = await pb
       .collection("solar_systems")
-      .getOne("zijoto20rma8mq7");
+      .getOne("9r8ymnfkl0veydb");
     const config: Config = resultList.data;
     return {
       config,
